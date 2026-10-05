@@ -1,0 +1,35 @@
+{
+    "name": "frontendmentor-template",
+    "version": "1.0.0",
+    "description": "Reusable Frontend Mentor starter template with SCSS and Gulp.",
+    "main": "index.js",
+    "scripts": {
+        "build": "gulp build",
+        "dev": "gulp",
+        "storybook": "storybook dev -p 6006",
+        "build-storybook": "storybook build",
+        "test:storybook": "playwright test --config=playwright.storybook.config.cjs",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "format": "gulp prettier"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@playwright/test": "^1.63.0",
+        "@storybook/addon-docs": "^10.6.1",
+        "@storybook/html-vite": "^10.6.1",
+        "browser-sync": "^3.0.4",
+        "chromatic": "^18.10.2",
+        "gh-pages": "^6.3.0",
+        "gulp": "^5.0.1",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-file-include": "^2.3.0",
+        "gulp-prettier": "^6.0.0",
+        "gulp-sass": "^6.0.1",
+        "gulp-sourcemaps": "^3.0.0",
+        "prettier": "^3.9.6",
+        "sass": "^1.104.0",
+        "storybook": "^10.6.1"
+    }
+}
