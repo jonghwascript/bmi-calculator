@@ -4,15 +4,14 @@
 @use 'mixins' as *; // _mixins.scss 파일이 같은 폴더에 있는 경우
 @use 'layout' as *;
 @use 'utilities' as *;
+@use 'bmi-layout';
+@use 'components';
+
 
 body {
   background-color: #fff;
 }
 
-// 컨텐츠 가운데 정렬 + 최대폭 wrapper. 챌린지마다 max-width 값만 바꿔서 쓴다.
-// .container {
-//   @include m.container(1110px, 24px);
-// }
-
-// tablet/desktop에서 레이아웃 구조 자체가 바뀔 때(예: flex-direction, grid-template-columns)는
-// @include m.mq('tablet') { ... } 처럼 각 셀렉터 안에서 사용한다.
+section {
+  border: 1px solid #000;
+}

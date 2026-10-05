@@ -1,0 +1,233 @@
+<form class="c-calculator" id="bmi-form" aria-labelledby="calculator-title">
+  <div class="l-stack l-box l-stack--calculator">
+    <h2 class="c-title c-title--form" id="calculator-title">
+      Enter your details below
+    </h2>
+    <fieldset class="c-fieldset">
+      <legend class="c-fieldset__legend u-sr-only">Measurement system</legend>
+      <div class="l-cluster l-cluster--units">
+        <label class="c-radio" for="unit-metric">
+          <div class="l-cluster l-cluster--radio">
+            <input
+              class="c-radio__input u-sr-only"
+              id="unit-metric"
+              type="radio"
+              name="unit-system"
+              value="metric"
+              checked
+            /><span class="c-radio__label">Metric</span>
+          </div>
+        </label>
+        <label class="c-radio" for="unit-imperial">
+          <div class="l-cluster l-cluster--radio">
+            <input
+              class="c-radio__input u-sr-only"
+              id="unit-imperial"
+              type="radio"
+              name="unit-system"
+              value="imperial"
+            /><span class="c-radio__label">Imperial</span>
+          </div>
+        </label>
+      </div>
+    </fieldset>
+    <fieldset class="c-fieldset" id="metric-fields">
+      <legend class="c-fieldset__legend u-sr-only">Height and weight</legend>
+      <div class="l-grid l-grid--measurements">
+        <div class="l-grid__item">
+          <div class="c-field">
+            <div class="l-stack l-stack--field">
+              <label class="c-field__label" for="height-cm">Height</label>
+              <div class="c-field__control">
+                <div class="l-cluster l-box l-cluster--input">
+                  <input
+                    class="c-input"
+                    id="height-cm"
+                    name="height-cm"
+                    type="number"
+                    min="0"
+                    step="any"
+                    inputmode="decimal"
+                    placeholder="0"
+                    required
+                    aria-describedby="height-cm-unit"
+                  /><span class="c-field__unit" id="height-cm-unit">cm</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="l-grid__item">
+          <div class="c-field">
+            <div class="l-stack l-stack--field">
+              <label class="c-field__label" for="weight-kg">Weight</label>
+              <div class="c-field__control">
+                <div class="l-cluster l-box l-cluster--input">
+                  <input
+                    class="c-input"
+                    id="weight-kg"
+                    name="weight-kg"
+                    type="number"
+                    min="0"
+                    step="any"
+                    inputmode="decimal"
+                    placeholder="0"
+                    required
+                    aria-describedby="weight-kg-unit"
+                  /><span class="c-field__unit" id="weight-kg-unit">kg</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="c-fieldset" id="imperial-fields" disabled>
+      <legend class="c-fieldset__legend u-sr-only">Height and weight</legend>
+      <div class="c-fieldset__layout l-stack">
+        <div class="c-fieldset__layout-inner l-stack">
+          <p class="c-fieldset__title">Height</p>
+          <div class="l-grid l-grid--measurements">
+            <div class="l-grid__item">
+              <div class="c-field">
+                <div class="l-stack l-stack--field">
+                  <label class="c-field__label u-sr-only" for="height-ft"
+                    >Height (feet)</label
+                  >
+                  <div class="c-field__control">
+                    <div class="l-cluster l-box l-cluster--input">
+                      <input
+                        class="c-input"
+                        id="height-ft"
+                        name="height-ft"
+                        type="number"
+                        min="0"
+                        step="any"
+                        inputmode="decimal"
+                        placeholder="0"
+                        required
+                        disabled
+                        aria-describedby="height-ft-unit"
+                      /><span class="c-field__unit" id="height-ft-unit"
+                        >ft</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="l-grid__item">
+              <div class="c-field">
+                <div class="l-stack l-stack--field">
+                  <label class="c-field__label u-sr-only" for="height-in"
+                    >Height (inches)</label
+                  >
+                  <div class="c-field__control">
+                    <div class="l-cluster l-box l-cluster--input">
+                      <input
+                        class="c-input"
+                        id="height-in"
+                        name="height-in"
+                        type="number"
+                        min="0"
+                        step="any"
+                        inputmode="decimal"
+                        placeholder="0"
+                        required
+                        disabled
+                        aria-describedby="height-in-unit"
+                      /><span class="c-field__unit" id="height-in-unit"
+                        >in</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="c-fieldset__layout-inner l-stack">
+          <p class="c-fieldset__title">Weight</p>
+          <div class="l-grid l-grid--measurements">
+            <div class="l-grid__item">
+              <div class="c-field">
+                <div class="l-stack l-stack--field">
+                  <label class="c-field__label u-sr-only" for="weight-st"
+                    >Weight (stones)</label
+                  >
+                  <div class="c-field__control">
+                    <div class="l-cluster l-box l-cluster--input">
+                      <input
+                        class="c-input"
+                        id="weight-st"
+                        name="weight-st"
+                        type="number"
+                        min="0"
+                        step="any"
+                        inputmode="decimal"
+                        placeholder="0"
+                        required
+                        disabled
+                        aria-describedby="weight-st-unit"
+                      /><span class="c-field__unit" id="weight-st-unit"
+                        >st</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="l-grid__item">
+              <div class="c-field">
+                <div class="l-stack l-stack--field">
+                  <label class="c-field__label u-sr-only" for="weight-lb"
+                    >Weight (pounds)</label
+                  >
+                  <div class="c-field__control">
+                    <div class="l-cluster l-box l-cluster--input">
+                      <input
+                        class="c-input"
+                        id="weight-lb"
+                        name="weight-lb"
+                        type="number"
+                        min="0"
+                        step="any"
+                        inputmode="decimal"
+                        placeholder="0"
+                        required
+                        disabled
+                        aria-describedby="weight-lb-unit"
+                      /><span class="c-field__unit" id="weight-lb-unit"
+                        >lbs</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <p class="c-alert c-alert--error" id="bmi-error" role="alert" hidden></p>
+    <div class="c-bmi-result l-box is-empty">
+      <div class="l-stack l-stack--result">
+        <div class="l-stack l-stack--title">
+          <h3 class="c-title c-title--result">Your BMI</h3>
+          <output
+            class="c-bmi-result__value"
+            id="bmi-result"
+            for="height-cm weight-kg height-ft height-in weight-st weight-lb"
+            aria-live="polite"
+            aria-atomic="true"
+            >22.0</output
+          >
+        </div>
+        <p class="c-bmi-result__text">
+          Your BMI suggests you’re a healthy weight. Your ideal weight is
+          between <span>9st 6lbs - 12st 10lbs.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</form>

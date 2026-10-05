@@ -1,0 +1,153 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.c-field {
+  .l-stack--field {
+    --space: 8px;
+    .c-field__label {
+      @include font-style(14px, 400, 1.5);
+      color: $grey-500;
+    }
+    .c-field__control {
+      .l-cluster--input {
+        padding: 24px;
+        border-color: $grey-500;
+        flex-wrap: nowrap;
+        .c-input {
+          @include font-style(24px, 600, 1.2);
+          color: $Blue-900;
+          letter-spacing: -5%;
+          border: 0;
+          width: 100%;
+          flex-grow: 0;
+          min-width: 0;
+          background-color: transparent;
+        }
+        .c-field__unit {
+          @include font-style(24px, 600, 1.2);
+          color: $Blue-500;
+          letter-spacing: -5%;
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+}
+
+.c-calculator {
+  width: 328px;
+  .l-stack {
+    --padding: 24px;
+
+    .c-title {
+      @include font-style(24px, 600, 1.2);
+      letter-spacing: -5%;
+      color: $Blue-900;
+    }
+
+    fieldset.c-fieldset:nth-of-type(1) {
+      .l-cluster--units {
+        .c-radio {
+          .l-cluster--radio {
+            --space: 16px;
+            &::before {
+              content: '';
+              display: block;
+              border: 1px solid $grey-500;
+              width: 31px;
+              height: 31px;
+              border-radius: 50%;
+            }
+            .c-radio__label {
+              @include font-style(16px, 600, 1.5);
+              color: $Blue-900;
+            }
+          }
+
+          &:has(.c-radio__input:checked) {
+            .l-cluster--radio {
+              &::before {
+                border: 0;
+
+                /* 1. 중앙 원 색상 */
+                background-color: $Blue-500;
+                width: 15px;
+                height: 15px;
+
+                /* 2. 바깥쪽 연한 파란색 원 (번짐 없이 깨끗하게 채우는 그림자) */
+                /* 구조: x축 y축 번짐크기 확장크기 색상 */
+                box-shadow: 0 0 0 8px $Blue-100;
+
+                margin-right: 16px; /* 바깥 영역이 넓어졌으므로 마진 확보 */
+                vertical-align: middle;
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  fieldset#metric-fields {
+    .l-grid--measurements {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(2, auto);
+      row-gap: 16px;
+    }
+  }
+  
+  fieldset#imperial-fields {
+    .c-fieldset__layout {
+      --space: 16px;
+    }
+    .c-fieldset__layout-inner {
+      --space: 8px;
+    }
+    .c-fieldset__title {
+      @include font-style(14px, 400, 1.5);
+      color: $grey-500;
+    }
+    .l-grid--measurements {
+      grid-template-columns: repeat(2, minmax(0, min(238px, 100%)));
+      grid-template-rows: 1fr;
+      gap: 24px;
+
+      .c-field__control{
+        .l-box {
+          --padding: 24px;
+        }
+      }
+    }
+  }
+
+  .c-bmi-result{
+    --padding: 24px;
+    background-color: $Blue-500;
+
+    .l-stack--result{
+      --space: 24px;
+
+      .l-stack--title {
+        --space: 8px;
+        .c-title{
+          color: $White;
+          @include font-style(16px, 600, 1.5);
+        }
+    
+        .c-bmi-result__value{
+          color: $White;
+          @include font-style(48px, 600, 1.5);
+        }
+      }
+      .c-bmi-result__text{
+        color: $White;
+        @include font-style(14px, 400, 1.5);
+  
+        span{
+          @include font-style(14px, 600, 1.5);
+        }
+      }
+    }
+  }
+}

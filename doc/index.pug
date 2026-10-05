@@ -1,0 +1,134 @@
+//- pattern.md 기준: l- = 배치·너비·간격, c- = 컴포넌트 외형.
+//- 마크업 초안입니다. CSS와 계산·단위 전환 JavaScript는 별도 구현합니다.
+//- 문구는 피그마 원문이 아닌 임시 문구입니다.
+//- 선택적 locals: resultPhotoSrc, resultPhotoAlt, stylesheetHref, scriptSrc.
+//- 이미지 경로가 없으면 깨진 이미지 대신 자리 표시자를 출력합니다.
+
+mixin measurementField(id, label, unit, inactive)
+  .l-grid__item
+    .c-field
+      .l-stack.l-stack--field
+        label.c-field__label(for=id)= label
+        .c-field__control
+          .l-cluster.l-cluster--input
+            input.c-input(id=id name=id type="number" min="0" step="any" inputmode="decimal" placeholder="0" required disabled=inactive aria-describedby=id + '-unit')
+            span.c-field__unit(id=id + '-unit')= unit
+
+mixin tipCard(key, title, description)
+  li.l-grid__item
+    article.c-tip(class='c-tip--' + key aria-labelledby='tip-' + key)
+      .l-stack.l-stack--card
+        //- 실제 아이콘을 연결할 위치. 장식 아이콘에는 aria-hidden="true" 사용.
+        h3.c-title.c-title--card(id='tip-' + key)= title
+        p.c-paragraph= description
+
+mixin limitationCard(key, title, description)
+  //- 데스크탑 grid-area는 c-card 대신 이 배치 래퍼에 지정합니다.
+  .l-grid__item(class='l-limitations__' + key)
+    article.c-card.c-card--limitation(aria-labelledby='limitation-' + key)
+      .l-stack.l-stack--card
+        h3.c-title.c-title--card(id='limitation-' + key)= title
+        p.c-paragraph= description
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title Body Mass Index Calculator
+    if stylesheetHref
+      link(rel="stylesheet" href=stylesheetHref)
+  body
+    main.l-stack.l-stack--page
+      //- 1. Hero: 모바일 1열 → 데스크탑 텍스트·폼 2열.
+      section.c-hero(aria-labelledby="hero-title")
+        .l-wrapper
+          .l-stack.l-stack--section
+            header
+              a.c-brand(href="#hero-title" aria-label="BMI calculator home") BMI calculator
+            .l-grid.l-grid--hero
+              .l-grid__item.l-hero__text
+                .l-stack.l-stack--intro
+                  h1#hero-title.c-title.c-title--hero Body Mass Index Calculator
+                  p.c-paragraph Enter your height and weight to calculate your BMI.
+              .l-grid__item.l-hero__form
+                form#bmi-form.c-calculator(aria-labelledby="calculator-title")
+                  .l-stack.l-stack--calculator
+                    h2#calculator-title.c-title.c-title--form Enter your details below
+                    fieldset.c-fieldset
+                      legend.c-fieldset__legend Measurement system
+                      .l-cluster.l-cluster--units
+                        label.c-radio(for="unit-metric")
+                          .l-cluster.l-cluster--radio
+                            input#unit-metric.c-radio__input(type="radio" name="unit-system" value="metric" checked)
+                            span.c-radio__label Metric
+                        label.c-radio(for="unit-imperial")
+                          .l-cluster.l-cluster--radio
+                            input#unit-imperial.c-radio__input(type="radio" name="unit-system" value="imperial")
+                            span.c-radio__label Imperial
+                    fieldset#metric-fields.c-fieldset
+                      legend.c-fieldset__legend Height and weight
+                      .l-grid.l-grid--measurements
+                        +measurementField('height-cm', 'Height', 'cm', false)
+                        +measurementField('weight-kg', 'Weight', 'kg', false)
+                    //- JSでfieldsetのhiddenとdisabledを切り替えます。
+                    //- 非表示の必須入力が検証を妨げないよう初期状態は無効化。
+                    fieldset#imperial-fields.c-fieldset(hidden disabled)
+                      legend.c-fieldset__legend Height and weight
+                      .l-grid.l-grid--measurements
+                        +measurementField('height-ft', 'Height (feet)', 'ft', true)
+                        +measurementField('height-in', 'Height (inches)', 'in', true)
+                        +measurementField('weight-st', 'Weight (stones)', 'st', true)
+                        +measurementField('weight-lb', 'Weight (pounds)', 'lbs', true)
+                    //- 入力エラー時はc-field.has-error、c-input.is-invalidと
+                    //- aria-invalid / aria-describedbyをJSで更新します。
+                    p#bmi-error.c-alert.c-alert--error(role="alert" hidden)
+                    //- JSで入力に応じて更新する結果表示領域。
+                    //- CSSでは.c-bmi-result.is-emptyのように状態を限定します。
+                    .c-bmi-result.is-empty
+                      .l-stack.l-stack--result
+                        h3.c-title.c-title--result Your BMI
+                        output#bmi-result.c-bmi-result__value(for="height-cm weight-kg height-ft height-in weight-st weight-lb" aria-live="polite" aria-atomic="true") Enter your height and weight to see your result.
+
+      //- 2. Your result: モバイル1列 → タブレット以降は写真・説明の2列を検討。
+      section(aria-labelledby="result-title")
+        .l-wrapper
+          .l-grid.l-grid--result
+            .l-grid__item.l-result__photo
+              if resultPhotoSrc
+                img.c-photo(src=resultPhotoSrc alt=resultPhotoAlt || '' loading="lazy" decoding="async")
+              else
+                .c-photo-placeholder(role="img" aria-label="Result section photo placeholder") Photo
+            .l-grid__item.l-result__description
+              .l-stack.l-stack--intro
+                h2#result-title.c-title.c-title--section What your BMI result means
+                p.c-paragraph This section will explain the calculator result and introduce the limitations below.
+
+      //- 3. Tips: モバイル・タブレット1列 → デスクトップ3列。
+      section.c-tips(aria-labelledby="tips-title")
+        .l-wrapper
+          .l-stack.l-stack--section
+            //- CSSで視覚的に隠しても支援技術には見出しを残します。
+            h2#tips-title.c-title.u-visually-hidden Healthy habits
+            ul.l-grid.l-grid--tips
+              +tipCard('eating', 'Healthy eating', 'Add the healthy eating tip from the design here.')
+              +tipCard('exercise', 'Regular exercise', 'Add the regular exercise tip from the design here.')
+              +tipCard('sleep', 'Adequate sleep', 'Add the sleep tip from the design here.')
+
+      //- 4. Limitations: モバイル1列 → タブレット2列 → デスクトップ任意配置。
+      //- タイトルと各カードのラッパーを同じGridの直接の子にします。
+      //- grid-area用クラス: title / gender / age / muscle / pregnancy / race。
+      section(aria-labelledby="limitations-title")
+        .l-wrapper
+          .l-grid.l-grid--limitations
+            .l-grid__item.l-limitations__title
+              .l-stack.l-stack--intro
+                h2#limitations-title.c-title.c-title--section Limitations of BMI
+                p.c-paragraph Add the introduction to BMI limitations from the design here.
+            +limitationCard('gender', 'Gender', 'Add the gender limitation text from the design here.')
+            +limitationCard('age', 'Age', 'Add the age limitation text from the design here.')
+            +limitationCard('muscle', 'Muscle', 'Add the muscle limitation text from the design here.')
+            +limitationCard('pregnancy', 'Pregnancy', 'Add the pregnancy limitation text from the design here.')
+            +limitationCard('race', 'Race', 'Add the race limitation text from the design here.')
+    if scriptSrc
+      script(src=scriptSrc defer)
