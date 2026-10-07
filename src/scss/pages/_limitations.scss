@@ -1,0 +1,70 @@
+@use '../abstracts' as *;
+
+// "Limitations of BMI" 섹션
+.c-limitations {
+  margin-block-start: 82px;
+}
+
+.l-grid--limitations {
+  @include mq('tablet') {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 56px auto 24px auto 24px;
+    grid-template-areas:
+      'title title'
+      '. .'
+      'gender age'
+      '. .'
+      'muscle pregnancy'
+      '. .'
+      'race race';
+    align-items: stretch;
+    row-gap: 0;
+  }
+}
+
+// 태블릿 이상에서 각 항목을 grid-template-areas의 같은 이름 영역에 배치한다.
+@each $area in title, gender, age, muscle, pregnancy, race {
+  .l-limitations__#{$area} {
+    @include mq('tablet') {
+      grid-area: $area;
+    }
+  }
+}
+
+.l-limitations__race {
+  @include mq('tablet') {
+    justify-self: center;
+    width: 365px;
+  }
+}
+
+.l-limitations__title {
+  .c-title--section {
+    @include mq('tablet') {
+      text-align: center;
+    }
+  }
+
+  .c-paragraph {
+    text-align: center;
+  }
+}
+
+// 제한 사항 카드
+.c-card {
+  @include mq('tablet') {
+    height: 100%;
+  }
+
+  .c-title--card {
+    align-items: center;
+    @include heading(20px, 1.2);
+    color: $blue-900;
+  }
+
+  .icon {
+    --space: 1rem;
+    width: 32px;
+    height: 32px;
+  }
+}

@@ -1,0 +1,44 @@
+@use '../abstracts' as *;
+
+// "Healthy habits" 섹션
+.c-tips {
+  margin-block-start: 62px;
+  padding-block: 56px;
+  background-image: $gradient-sky;
+}
+
+.l-grid--tips {
+  @include mq('tablet') {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
+}
+
+// 모바일: 아이콘 아래로 글이 줄바꿈 / 태블릿 이상: 아이콘과 글을 가로로 배치
+.c-tip {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 32px;
+
+  @include mq('tablet') {
+    flex-wrap: nowrap;
+    gap: 40px;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 64px;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  > .l-stack {
+    flex-grow: 1;
+  }
+
+  .c-title--card {
+    @include heading(24px, 1.2);
+    color: $blue-900;
+  }
+}

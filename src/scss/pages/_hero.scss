@@ -1,0 +1,39 @@
+@use '../abstracts' as *;
+
+.c-hero__header {
+  margin-inline: auto;
+
+  @include mq('desktop') {
+    margin-inline: 0;
+  }
+}
+
+.c-hero__logo {
+  width: clamp(2.25rem, calc(0.75rem + 3.125vw), 2.75rem);
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.l-grid--hero {
+  grid-template-columns: 1fr;
+  row-gap: 32px;
+}
+
+.c-title--hero {
+  @include heading(48px, 1.1);
+  color: $blue-900;
+  text-align: center;
+}
+
+// 태블릿 이상에서만 제목을 두 줄로 나눈다.
+.c-title__newline {
+  display: none;
+
+  @include mq('tablet') {
+    display: block;
+  }
+}
+
+.c-hero .c-paragraph {
+  text-align: center;
+}

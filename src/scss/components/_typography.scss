@@ -1,0 +1,14 @@
+@use '../abstracts' as *;
+
+// 여러 섹션이 공유하는 텍스트 스타일.
+// 섹션마다 다른 제목(hero, card 등)은 해당 섹션 파일에 둔다.
+
+.c-title--section {
+  @include heading(32px, 1.1);
+  color: $blue-900;
+}
+
+.c-paragraph {
+  @include font-style(16px, 400, 1.5);
+  color: $grey-500;
+}

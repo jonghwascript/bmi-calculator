@@ -1,0 +1,27 @@
+@use '../abstracts' as *;
+
+// 페이지 전체 그리드: 섹션을 한 열로 쌓고 섹션 간격은 각 섹션이 정한다.
+.l-grid--page {
+  position: relative;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, auto);
+  gap: 0;
+  padding-block: 34px;
+
+  // 히어로 뒤에 깔리는 아래쪽이 둥근 그라디언트 배경
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    display: block;
+    width: 100%;
+    height: 650px;
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    background-image: $gradient-sky;
+  }
+
+  > section {
+    padding-inline: $section-gutter;
+  }
+}

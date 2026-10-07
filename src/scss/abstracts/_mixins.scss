@@ -12,6 +12,14 @@
   line-height: $line-height;
 }
 
+// 제목·강조 숫자처럼 크기만 다르고 굵기·자간이 같은 텍스트.
+// 색은 맥락마다 달라 호출하는 쪽에서 지정한다.
+// @include heading(32px, 1.1);
+@mixin heading($size, $line-height) {
+  @include font-style($size, 600, $line-height);
+  letter-spacing: -5%;
+}
+
 // @include linear-gradient(to right, #ff7e5f, #feb47b)
 @mixin linear-gradient($direction, $start-color, $end-color) {
   background: $start-color; // 그라데이션 미지원 브라우저용 대체(Fallback) 색상

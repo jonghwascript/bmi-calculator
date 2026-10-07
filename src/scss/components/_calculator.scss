@@ -1,0 +1,194 @@
+@use '../abstracts' as *;
+
+// 입력 라벨과 imperial 그룹 제목이 공유하는 14px 보조 텍스트
+%text-label {
+  @include font-style(14px, 400, 1.5);
+  color: $grey-500;
+}
+
+// ------------------------------------------
+// Calculator 틀
+// ------------------------------------------
+.c-calculator {
+  width: min(clamp(20.5rem, calc(-0.85rem + 91.094vw), 42.875rem), 100%);
+  margin: auto;
+
+  @include mq('desktop') {
+    width: 35.25rem; // 564px
+  }
+}
+
+.l-stack--calculator {
+  --padding: 24px;
+  border-radius: 1.5rem; // 24px
+}
+
+.c-title--form {
+  @include heading(24px, 1.2);
+  color: $blue-900;
+}
+
+// ------------------------------------------
+// 단위 선택 라디오 (Metric / Imperial)
+// ------------------------------------------
+.l-cluster--units {
+  --space: 24px;
+  justify-content: space-between;
+}
+
+.c-radio {
+  flex: 1;
+
+  // 선택됨: 가운데 파란 점 + 번짐 없는 연한 파란 링
+  &:has(.c-radio__input:checked) .l-cluster--radio::before {
+    width: 15px;
+    height: 15px;
+    margin-inline-start: 10px;
+    margin-inline-end: 16px; // 링이 차지하는 바깥 영역만큼 확보
+    border: 0;
+    background-color: $blue-500;
+    vertical-align: middle;
+    box-shadow: 0 0 0 8px $blue-100;
+  }
+
+  &__label {
+    @include font-style(16px, 600, 1.5);
+    color: $blue-900;
+  }
+}
+
+.l-cluster--radio {
+  --space: 16px;
+  justify-content: space-around;
+
+  // 선택되지 않은 라디오 원
+  &::before {
+    content: '';
+    display: block;
+    width: 31px;
+    height: 31px;
+    border: 1px solid $grey-500;
+    border-radius: 50%;
+  }
+
+  @include mq('tablet') {
+    justify-content: initial;
+  }
+}
+
+// ------------------------------------------
+// 입력 필드
+// ------------------------------------------
+.l-stack--field {
+  --space: 8px;
+}
+
+.c-field__label {
+  @extend %text-label;
+}
+
+.l-cluster--input {
+  flex-wrap: nowrap;
+  padding: 24px;
+  border-color: $grey-500;
+}
+
+.c-input {
+  flex-grow: 0;
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background-color: transparent;
+  @include heading(24px, 1.2);
+  color: $blue-900;
+}
+
+.c-field__unit {
+  flex-shrink: 0;
+  @include heading(24px, 1.2);
+  color: $blue-500;
+}
+
+// ------------------------------------------
+// 단위별 입력 그룹
+// ------------------------------------------
+.c-fieldset--metric .l-grid--measurements {
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, auto);
+  row-gap: 1rem;
+
+  @include mq('tablet') {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(1, auto);
+    column-gap: 1.5rem; // 24px
+  }
+}
+
+.c-fieldset--imperial .l-grid--measurements {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 7.5rem), 1fr));
+  grid-template-rows: 1fr;
+  gap: 16px;
+}
+
+.c-fieldset__layout {
+  --space: 16px;
+}
+
+.c-fieldset__layout-inner {
+  --space: 8px;
+}
+
+.c-fieldset__title {
+  @extend %text-label;
+}
+
+// ------------------------------------------
+// 결과 패널
+// ------------------------------------------
+.c-bmi-result {
+  --padding: 1.5rem; // 24px
+  background-color: $blue-500;
+
+  @include mq('tablet') {
+    --padding: 2rem; // 32px
+    border-top-right-radius: 999px;
+    border-bottom-right-radius: 999px;
+  }
+
+  &__value {
+    @include font-style(3rem, 600, 1.5); // 48px
+    color: $white;
+  }
+
+  &__text {
+    @include font-style(0.875rem, 400, 1.5); // 14px
+    color: $white;
+
+    span {
+      font-weight: 600;
+    }
+  }
+}
+
+.l-stack--result {
+  --space: 1.5rem; // 24px
+
+  @include mq('tablet') {
+    flex-direction: row;
+    align-items: center;
+
+    > .l-stack--title,
+    > .c-bmi-result__text {
+      flex: 1;
+    }
+  }
+}
+
+.l-stack--title {
+  --space: 0.5rem; // 8px
+}
+
+.c-title--result {
+  @include heading(1rem, 1.5);
+  color: $white;
+}
