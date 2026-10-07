@@ -35,7 +35,17 @@
 }
 
 .c-calculator {
-  width: 328px;
+  margin: auto;
+  width: min(clamp(20.5rem, calc(-0.85rem + 91.094vw), 42.875rem), 100%);
+
+  @include mq('desktop') {
+    width: 35.25rem; //564px
+  }
+
+  .l-stack--calculator {
+    border-radius: 1.5rem; //24px
+  }
+
   .l-stack {
     --padding: 24px;
 
@@ -47,8 +57,22 @@
 
     fieldset.c-fieldset:nth-of-type(1) {
       .l-cluster--units {
+        justify-content: space-between;
+        --space: 24px;
+
+        label[for='unit-metric'],
+        label[for='unit-imperial'] {
+          flex: 1;
+        }
+
         .c-radio {
-          .l-cluster--radio {
+          .l-cluster--radio {          
+            justify-content: space-around;
+
+            @include mq('tablet'){
+              justify-content:initial;
+            }
+          
             --space: 16px;
             &::before {
               content: '';
@@ -78,7 +102,8 @@
                 /* 구조: x축 y축 번짐크기 확장크기 색상 */
                 box-shadow: 0 0 0 8px $Blue-100;
 
-                margin-right: 16px; /* 바깥 영역이 넓어졌으므로 마진 확보 */
+                margin-inline-end: 16px; /* 바깥 영역이 넓어졌으므로 마진 확보 */
+                margin-inline-start: 10px;
                 vertical-align: middle;
               }
             }
@@ -86,18 +111,24 @@
         }
       }
     }
-
   }
 
   fieldset#metric-fields {
     .l-grid--measurements {
       grid-template-columns: 1fr;
       grid-template-rows: repeat(2, auto);
-      row-gap: 16px;
+      row-gap: 1rem;
+
+      @include mq('tablet'){
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(1, auto);
+        column-gap: 1.5rem; //24px
+      }
     }
   }
-  
+
   fieldset#imperial-fields {
+
     .c-fieldset__layout {
       --space: 16px;
     }
@@ -109,11 +140,12 @@
       color: $grey-500;
     }
     .l-grid--measurements {
-      grid-template-columns: repeat(2, minmax(0, min(238px, 100%)));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 7.5rem), 1fr));
+      
       grid-template-rows: 1fr;
-      gap: 24px;
+      gap: 16px;
 
-      .c-field__control{
+      .c-field__control {
         .l-box {
           --padding: 24px;
         }
@@ -121,31 +153,47 @@
     }
   }
 
-  .c-bmi-result{
-    --padding: 24px;
+  .c-bmi-result {
     background-color: $Blue-500;
+    --padding: 1.5rem;  //24px
 
-    .l-stack--result{
-      --space: 24px;
+    @include mq('tablet'){
+      --padding: 2rem;  //32px
+      border-top-right-radius: 999px;
+      border-bottom-right-radius: 999px;
+    }
 
-      .l-stack--title {
-        --space: 8px;
-        .c-title{
-          color: $White;
-          @include font-style(16px, 600, 1.5);
-        }
-    
-        .c-bmi-result__value{
-          color: $White;
-          @include font-style(48px, 600, 1.5);
+    .l-stack--result {
+      --space: 1.5rem;  //24px
+
+      @include mq('tablet') {
+        flex-direction: row;
+        align-items: center;
+        
+        > .l-stack--title,
+        > .c-bmi-result__text{
+          flex: 1;
         }
       }
-      .c-bmi-result__text{
+
+      .l-stack--title {
+        --space: 0.5rem; //8px
+        .c-title {
+          color: $White;
+          @include font-style(1rem, 600, 1.5);
+        }
+
+        .c-bmi-result__value {
+          color: $White;
+          @include font-style(3rem, 600, 1.5);  //48px
+        }
+      }
+      .c-bmi-result__text {
         color: $White;
-        @include font-style(14px, 400, 1.5);
-  
-        span{
-          @include font-style(14px, 600, 1.5);
+        @include font-style(0.875rem, 400, 1.5);  //14x
+
+        span {
+          @include font-style(0.875rem, 600, 1.5);  //14px
         }
       }
     }

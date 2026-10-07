@@ -10,40 +10,15 @@
       sizes="32x32"
       href="./assets/images/favicon-32x32.png"
     />
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/main.js" defer></script>
     <title>Frontend Mentor | Body Mass Index Calculator</title>
   </head>
   <body>
-    <main class="l-stack l-stack--page">
+    <main class="l-grid l-grid--page">
       <section class="c-hero" aria-labelledby="hero-title">
-        <div class="l-wrapper">
-          <div class="l-stack l-stack--section">
-            <header>
-              <a
-                class="c-brand"
-                href="#hero-title"
-                aria-label="BMI calculator home"
-                >BMI calculator</a
-              >
-            </header>
-            <div class="l-grid l-grid--hero">
-              <div class="l-grid__item l-hero__text">
-                <div class="l-stack l-stack--intro">
-                  <h1 class="c-title c-title--hero" id="hero-title">
-                    Body Mass Index Calculator
-                  </h1>
-                  <p class="c-paragraph">
-                    Enter your height and weight to calculate your BMI.
-                  </p>
-                </div>
-              </div>
-              <div class="l-grid__item l-hero__form">
-                  <!-- 계산기 -->
-                   @@include('./components/calculator.html')
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- hero -->
+        @@include('./components/hero.html')
       </section>
       <section aria-labelledby="result-title">
         <div class="l-wrapper">
@@ -54,7 +29,7 @@
                 role="img"
                 aria-label="Result section photo placeholder"
               >
-                Photo
+                <img src="./images/image-man-eating.webp" alt="" />
               </div>
             </div>
             <div class="l-grid__item l-result__description">
@@ -63,8 +38,13 @@
                   What your BMI result means
                 </h2>
                 <p class="c-paragraph">
-                  This section will explain the calculator result and introduce
-                  the limitations below.
+                  A BMI range of 18.5 to 24.9 is considered a 'healthy weight.'
+                  Maintaining a healthy weight may lower your chances of
+                  experiencing health issues later on, such as obesity and type
+                  2 diabetes. Aim for a nutritious diet with reduced fat and
+                  sugar content, incorporating ample fruits and vegetables.
+                  Additionally, strive for regular physical activity, ideally
+                  about 30 minutes daily for five days a week.
                 </p>
               </div>
             </div>
@@ -74,48 +54,66 @@
       <section class="c-tips" aria-labelledby="tips-title">
         <div class="l-wrapper">
           <div class="l-stack l-stack--section">
-            <h2 class="c-title u-visually-hidden" id="tips-title">
+            <h2 class="c-title u-sr-only" id="tips-title">
               Healthy habits
             </h2>
-            <ul class="l-grid l-grid--tips">
+            <ul class="l-grid l-grid--tips">              
               <li class="l-grid__item">
                 <article
-                  class="c-tip c-tip--eating"
+                  class="c-tip c-tip--eating l-cluster"
                   aria-labelledby="tip-eating"
                 >
+                  <img
+                    src="./images/icon-eating.svg"
+                    class="c-tip__icon"
+                    alt=""
+                  />
                   <div class="l-stack l-stack--card">
                     <h3 class="c-title c-title--card" id="tip-eating">
                       Healthy eating
                     </h3>
                     <p class="c-paragraph">
-                      Add the healthy eating tip from the design here.
+                      Healthy eating promotes weight control, disease prevention, better digestion, immunity, mental clarity, and mood.
                     </p>
                   </div>
                 </article>
               </li>
               <li class="l-grid__item">
                 <article
-                  class="c-tip c-tip--exercise"
+                  class="c-tip c-tip--exercise l-cluster"
                   aria-labelledby="tip-exercise"
                 >
+                  <img
+                    src="./images/icon-exercise.svg"
+                    class="c-tip__icon"
+                    alt=""
+                  />
                   <div class="l-stack l-stack--card">
                     <h3 class="c-title c-title--card" id="tip-exercise">
                       Regular exercise
                     </h3>
                     <p class="c-paragraph">
-                      Add the regular exercise tip from the design here.
+                      Exercise improves fitness, aids weight control, elevates mood, and reduces disease risk, fostering wellness and longevity.
                     </p>
                   </div>
                 </article>
               </li>
               <li class="l-grid__item">
-                <article class="c-tip c-tip--sleep" aria-labelledby="tip-sleep">
+                <article
+                  class="c-tip c-tip--sleep l-cluster"
+                  aria-labelledby="tip-sleep"
+                >
+                  <img
+                    src="./images/icon-sleep.svg"
+                    class="c-tip__icon"
+                    alt=""
+                  />
                   <div class="l-stack l-stack--card">
                     <h3 class="c-title c-title--card" id="tip-sleep">
                       Adequate sleep
                     </h3>
                     <p class="c-paragraph">
-                      Add the sleep tip from the design here.
+                      Sleep enhances mental clarity, emotional stability, and physical wellness, promoting overall restoration and rejuvenation.
                     </p>
                   </div>
                 </article>
@@ -133,79 +131,142 @@
                   Limitations of BMI
                 </h2>
                 <p class="c-paragraph">
-                  Add the introduction to BMI limitations from the design here.
+                  Although BMI is often a practical indicator of healthy weight,
+                  it is not suited for every person. Specific groups should
+                  carefully consider their BMI outcomes, and in certain cases,
+                  the measurement may not be beneficial to use.
                 </p>
               </div>
             </div>
             <div class="l-grid__item l-limitations__gender">
               <article
-                class="c-card c-card--limitation"
+                class="c-card c-card--limitation l-box"
                 aria-labelledby="limitation-gender"
               >
                 <div class="l-stack l-stack--card">
-                  <h3 class="c-title c-title--card" id="limitation-gender">
-                    Gender
+                  <h3
+                    class="c-title c-title--card l-with-icon"
+                    id="limitation-gender"
+                  >
+                    <svg
+                      class="icon l-icon"
+                      aria-hidden="true"
+                      focusable="false"
+                      viewBox="0 0 32 32"
+                    >
+                      <use href="./images/icon-gender.svg"></use>
+                    </svg>
+                    <span>Gender</span>
                   </h3>
                   <p class="c-paragraph">
-                    Add the gender limitation text from the design here.
+                    The development and body fat composition of girls and boys
+                    vary with age. Consequently, a child's age and gender are
+                    considered when evaluating their BMI.
                   </p>
                 </div>
               </article>
             </div>
             <div class="l-grid__item l-limitations__age">
               <article
-                class="c-card c-card--limitation"
+                class="c-card c-card--limitation l-box"
                 aria-labelledby="limitation-age"
               >
                 <div class="l-stack l-stack--card">
-                  <h3 class="c-title c-title--card" id="limitation-age">Age</h3>
+                  <h3
+                    class="c-title c-title--card l-with-icon"
+                    id="limitation-age"
+                  >
+                    <svg
+                      class="icon l-icon"
+                      aria-hidden="true"
+                      focusable="false"
+                      viewBox="0 0 32 32"
+                    >
+                      <use href="./images/icon-age.svg"></use>
+                    </svg>
+                    <span>Age</span>
+                  </h3>
                   <p class="c-paragraph">
-                    Add the age limitation text from the design here.
+                    In aging individuals, increased body fat and muscle loss may
+                    cause BMI to underestimate body fat content.
                   </p>
                 </div>
               </article>
             </div>
             <div class="l-grid__item l-limitations__muscle">
               <article
-                class="c-card c-card--limitation"
+                class="c-card c-card--limitation l-box"
                 aria-labelledby="limitation-muscle"
               >
                 <div class="l-stack l-stack--card">
-                  <h3 class="c-title c-title--card" id="limitation-muscle">
-                    Muscle
+                  <h3
+                    class="c-title c-title--card l-with-icon"
+                    id="limitation-muscle"
+                  >
+                    <svg
+                      class="icon l-icon"
+                      aria-hidden="true"
+                      focusable="false"
+                      viewBox="0 0 32 32"
+                    >
+                      <use href="./images/icon-muscle.svg"></use>
+                    </svg>
+                    <span>Muscle</span>
                   </h3>
                   <p class="c-paragraph">
-                    Add the muscle limitation text from the design here.
+                    BMI may misclassify muscular individuals as overweight or obese, as it doesn't differentiate muscle from fat.
                   </p>
                 </div>
               </article>
             </div>
             <div class="l-grid__item l-limitations__pregnancy">
               <article
-                class="c-card c-card--limitation"
+                class="c-card c-card--limitation l-box"
                 aria-labelledby="limitation-pregnancy"
               >
                 <div class="l-stack l-stack--card">
-                  <h3 class="c-title c-title--card" id="limitation-pregnancy">
-                    Pregnancy
+                  <h3
+                    class="c-title c-title--card l-with-icon"
+                    id="limitation-pregnancy"
+                  >
+                    <svg
+                      class="icon l-icon"
+                      aria-hidden="true"
+                      focusable="false"
+                      viewBox="0 0 32 32"
+                    >
+                      <use href="./images/icon-pregnancy.svg"></use>
+                    </svg>
+                    <span>Pregnancy</span>
                   </h3>
                   <p class="c-paragraph">
-                    Add the pregnancy limitation text from the design here.
+                    Expectant mothers experience weight gain due to their growing baby. Maintaining a healthy pre-pregnancy BMI is advisable to minimise health risks for both mother and child.
                   </p>
                 </div>
               </article>
             </div>
             <div class="l-grid__item l-limitations__race">
               <article
-                class="c-card c-card--limitation"
+                class="c-card c-card--limitation l-box"
                 aria-labelledby="limitation-race"
               >
                 <div class="l-stack l-stack--card">
-                  <h3 class="c-title c-title--card" id="limitation-race">
-                    Race
+                  <h3
+                    class="c-title c-title--card l-with-icon"
+                    id="limitation-race"
+                  >
+                    <svg
+                      class="icon l-icon"
+                      aria-hidden="true"
+                      focusable="false"
+                      viewBox="0 0 32 32"
+                    >
+                      <use href="./images/icon-race.svg"></use>
+                    </svg>
+                    <spand>Race</spand>
                   </h3>
                   <p class="c-paragraph">
-                    Add the race limitation text from the design here.
+                    Certain health concerns may affect individuals of some Black and Asian origins at lower BMIs than others. To learn more, it is advised to discuss this with your GP or practice nurse.
                   </p>
                 </div>
               </article>
