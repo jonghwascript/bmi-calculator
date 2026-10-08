@@ -193,12 +193,28 @@ CSS는 `dist/css/style.css`로 출력되므로 이미지는 `url('../images/...'
 | SCSS 컴파일만 | `node -e "require('sass').compile('src/scss/style.scss')"` |
 | 빌드 | `npm run build` (`dist` 정리 후 재생성) |
 | 공백 오류 | `git diff --check` |
+| 레이아웃·접근성 회귀 | `npm run check:layout` 또는 `npm test` (빌드 후 `scripts/check-layout.js` 실행) |
 
-`npm test`는 실제 테스트가 없는 placeholder입니다.
+`npm test`는 `check:layout`을 실행합니다. Firefox, 스크린 리더, BMI 계산 결과, 시각적 정확성은 검사하지 않습니다.
+
+### `npm run check:layout`
+
+CSS·레이아웃을 바꾼 뒤 커밋 전에 실행합니다. 실패가 하나라도 있으면 종료 코드 1입니다.
+
+| 검사 | 조건 |
+| --- | --- |
+| 가로 넘침 | 기본 글꼴 16px: 320, 375, 767, 768, 1023, 1024, 1100, 1280, 1440px / 32px: 375px부터 같은 너비 |
+| 키보드 포커스 | 1280px에서 Tab으로 단위 라디오에 갔을 때 라벨 outline이 보이는지 |
+| 요청·콘솔 | 404 등 실패한 요청, 콘솔 오류가 없는지 |
+
+- 넘침이 있으면 넘치는 요소 중 가장 깊은 요소 3개를 원인 후보로 출력합니다. 레이아웃 전체가 밀린 경우에는 실제 원인보다 바깥 요소가 나올 수 있습니다.
+- `dist`를 내장 정적 서버로 띄우고 빈 포트를 자동으로 고릅니다. 설치된 Chrome을 쓰고, 없으면 Playwright Chromium으로 대체합니다(`npx playwright install chromium` 필요).
+- 320px + 글꼴 200%는 기준보다 엄격한 조건이라 검사에서 뺐습니다([8. 남은 과제](#8-남은-과제)).
+- 검사 항목을 늘릴 때는 `dist`에 일부러 문제를 넣고 실패하는지 확인한 뒤 다시 빌드합니다.
 
 ### 브라우저 측정
 
-- `npm run dev`는 HTTP 서버를 띄우지 않습니다. `dist`를 정적 서버로 띄워 확인합니다. 이 PC의 `python`은 Microsoft Store 연결용 실행 파일이라 동작하지 않으므로 Node로 띄웁니다.
+- `npm run dev`는 HTTP 서버를 띄우지 않습니다. 직접 확인할 때는 `dist`를 정적 서버로 띄웁니다. 이 PC의 `python`은 Microsoft Store 연결용 실행 파일이라 동작하지 않으므로 Node로 띄웁니다.
 - `node_modules`에 Playwright가 있어 `channel: 'chrome'`으로 설치된 Chrome을 띄울 수 있습니다. Playwright용 Firefox는 설치되어 있지 않습니다.
 - **텍스트 200% 재현**: `html`의 `font-size`가 아니라 브라우저 기본 글꼴 크기를 바꿔야 em 분기점까지 재현됩니다. Chrome 프로필의 `Default/Preferences`에 다음을 넣고 `launchPersistentContext`로 띄웁니다.
 

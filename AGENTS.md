@@ -93,7 +93,8 @@
 - `npm run build`: dist 정리, HTML 처리, SCSS 컴파일, 정적 파일 복사
 - `npm run dev`: 초기 빌드 및 파일 감시. HTTP 서버나 자동 브라우저 새로고침은 제공하지 않는다.
 - `npm run format`: 소스를 변경하는 명령이므로 검사 목적으로 무조건 실행하지 않는다.
-- `npm test`: 현재 실제 테스트가 없는 실패용 placeholder다. 테스트 통과로 보고하지 않는다.
+- `npm run check:layout` (`npm test`와 같음): 빌드 후 `scripts/check-layout.js`로 Chrome에서 너비·글꼴 크기(16px, 32px)별 가로 넘침, 단위 라디오 키보드 포커스 표시, 실패한 요청, 콘솔 오류를 검사한다. 빌드가 dist를 다시 만들므로 실행 전 dist에만 있는 변경이 없는지 확인한다.
+- `check:layout` 통과는 위 항목만 의미한다. Firefox, 스크린 리더, BMI 계산 결과, 시각적 정확성은 검사하지 않으므로 별도로 검증하거나 미검증으로 보고한다.
 - JavaScript 문법 검사: `node --check src/js/main.js`
 - 출력 파일 없이 SCSS 검사: `node -e "require('sass').compile('src/scss/style.scss')"`
 - 다른 프로젝트에 이 파일을 재사용할 때는 위 경로와 명령을 해당 프로젝트 설정에 맞게 갱신한다.

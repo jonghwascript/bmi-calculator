@@ -9,8 +9,9 @@
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
         "test:storybook": "playwright test --config=playwright.storybook.config.cjs",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "format": "gulp prettier"
+        "test": "npm run check:layout",
+        "format": "gulp prettier",
+        "check:layout": "gulp build && node scripts/check-layout.js"
     },
     "keywords": [],
     "author": "",
