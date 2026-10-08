@@ -3,6 +3,8 @@
 
 // 페이지 전체 그리드: 섹션을 한 열로 쌓고 섹션 간격은 각 섹션이 정한다.
 .l-grid--page {
+  // .l-center의 좌우 여백. 자손이 음수 여백으로 상쇄할 때도 이 값을 쓴다.
+  --gutter-inline: #{$space-gutter};
   max-inline-size: clamp(23.438rem, calc(6.162rem + 73.709vw), 72.5rem);
   margin-inline: auto;
 
@@ -39,7 +41,7 @@
   }
 
   > .c-tips{
-    margin-inline: -($section-gutter);
-    padding-inline: $section-gutter;
+    margin-inline: calc(-1 * var(--gutter-inline));
+    padding-inline: var(--gutter-inline);
   }
 }

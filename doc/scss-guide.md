@@ -269,11 +269,12 @@ $breakpoints: (
 - 두 번 이상 쓰는 값은 변수로 뺍니다.
 
 ```scss
-$gradient-sky: linear-gradient(135deg, #ffffff 0%, #d6e6fe 100%, #253347 100%);
-$section-gutter: 24px;
+$gradient-sky: linear-gradient(90deg, #d6e6fe 0%, #ebf3ff 40%, #ffffff 100%);
+$space-gutter: min(1.5rem, 6.4vw);
 ```
 
-- 변수로 계산한 값의 부호를 바꿀 때는 괄호로 감쌉니다: `margin-inline: (-$section-gutter);`
+- 고정 숫자 변수의 부호를 바꿀 때는 괄호로 감쌉니다: `margin-inline: (-$size);`
+- `min()`, `vw`처럼 브라우저가 계산하는 값은 Sass가 부호를 바꿀 수 없으므로 `calc(-1 * …)`를 씁니다: `margin-inline: calc(-1 * var(--gutter-inline));`
 - `rem`과 `px` 중 하나를 프로젝트 초기에 정해 통일합니다. 섞어 쓸 수밖에 없다면 `// 24px`처럼 환산값을 주석으로 남깁니다.
 
 ---

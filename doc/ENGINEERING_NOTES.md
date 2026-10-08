@@ -49,6 +49,27 @@ grid-template-columns: minmax(0, 29.25rem) minmax(0, 29.0625rem);
 column-gap: clamp(2rem, 8vw, 8.1875rem);
 ```
 
+### 가장자리 여백은 화면 너비로 상한을 둔다
+
+여백까지 모두 rem이면 글꼴을 키운 좁은 화면에서 여백이 텍스트 자리를 차지합니다. 375px에서 기본 글꼴을 32px로 키우면 입력 칸 하나에 페이지·계산기 박스·입력 칸 박스의 좌우 여백이 세 겹(296px)으로 쌓여, 입력 칸이 58px까지 줄고 문서가 408px로 넘쳤습니다.
+
+```scss
+// abstracts/_variables.scss — 375px × 6.4% = 24px
+$space-gutter: min(1.5rem, 6.4vw);
+```
+
+- 페이지(`--gutter-inline`), 계산기 박스(`--padding`), 입력 칸 박스(`padding`)에 씁니다.
+- 기본 글꼴에서는 375px 이상 어디서나 24px라 디자인과 같습니다. 글꼴을 키우면 넓은 화면에서는 여백도 커지고, 좁은 화면에서는 화면 너비의 6.4%에서 멈춥니다.
+- `clamp(1rem, …, 1.5rem)`은 최솟값 `1rem`도 글꼴을 따라 커지므로 효과가 작습니다.
+- **페이지 여백을 상쇄하는 음수 여백도 같은 값을 써야 합니다.** 결과 사진과 tips가 고정 `-24px`로 상쇄하던 때, 여백만 바꾸자 320px에서 페이지 여백(20.48px)과 어긋나 기본 글꼴에서도 324px로 넘쳤습니다. 지금은 `calc(-1 * var(--gutter-inline))`로 상쇄합니다.
+- `min()`처럼 브라우저가 계산하는 값에 `(-$space-gutter)`를 쓰면 Sass가 `Undefined operation "-min(...)"` 오류를 냅니다.
+
+| 375px, 기본 글꼴 32px | 조정 전 | 조정 후 |
+| --- | --- | --- |
+| 여백 + 테두리 합계 | 296px | 약 150px |
+| 입력 칸 너비 | 58px | 145px |
+| 문서 너비 | 408px (넘침) | 375px |
+
 ## 3. CSS Grid에서 겪은 문제
 
 ### 고정 너비 열을 가운데로: `justify-content`
@@ -201,14 +222,9 @@ Claude in Chrome 확장으로 연 탭이 백그라운드(`document.visibilitySta
 
 | 항목 | 내용 |
 | --- | --- |
-| 텍스트 200% + 375px | 문서 너비 408px로 넘침. 페이지·계산기·입력 칸의 rem 여백이 함께 커져 여백만 약 290px. 여백 디자인 조정 필요 |
-| Welcome 상태 스타일 | JS가 `.is-empty`를 붙이지만 SCSS 규칙이 없음 |
+| 텍스트 200% + 320px | 문서 너비 360px로 넘침(hero 영역). 320px 너비(WCAG 1.4.10 Reflow 기준, 기본 글꼴)와 375px 텍스트 200%는 통과. 원인 요소 미확인 |
 | Imperial 범위 표기 | 반올림 사용. 마크업 예시 문구(`9st 6lbs - 12st 10lbs`)와 1lb 차이. 디자인 시안(`preview.jpg`)과 대조 필요 |
-| 오류 메시지 연결 | `#bmi-error`에 `aria-describedby`·`aria-invalid` 연결 없음, `.c-alert` 스타일 없음 |
-| 결과 사진 | `role="img" aria-label="... placeholder"`가 의미 없는 문구로 읽힘. 장식이면 `alt=""`만 |
 | 로고 링크 | 이름은 "home"인데 같은 페이지 h1로 이동 |
-| favicon | `./assets/images/` 경로 404, 실제 파일은 `./images/` |
-| 본문 오타 | hero 본문 "(BM)" → "(BMI)" |
 | 스킵 링크 | `.c-skip-link` CSS만 있고 요소 없음 (한 페이지·반복 메뉴 없음이라 필수 아님) |
 | 결과 사진 위치 | 1024px에서 `.l-result__photo` 음수 여백으로 화면 왼쪽 끝에 붙음 |
 | 미검증 | Firefox, 모바일 실기기, 스크린 리더, 고대비 모드 |

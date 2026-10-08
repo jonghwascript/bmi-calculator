@@ -40,7 +40,7 @@
 
 // 섹션 좌우 여백을 상쇄해 사진을 화면 가장자리까지 붙인다.
 .l-result__photo {
-  margin-inline: (-$section-gutter);
+  margin-inline: calc(-1 * var(--gutter-inline));
 
   img {
     width: 100%;

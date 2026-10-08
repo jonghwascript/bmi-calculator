@@ -19,7 +19,7 @@
 }
 
 .l-stack--calculator {
-  --padding: 1.5rem;   //24px
+  --padding: #{$space-gutter}; // 375px에서 24px
   border-radius: 1.5rem; // 24px
 }
 
@@ -96,8 +96,14 @@
 
 .l-cluster--input {
   flex-wrap: nowrap;
-  padding: 1.5rem;  //24px
+  padding: $space-gutter; // 375px에서 24px
   border-color: $grey-500;
+
+  // 오류: 색만으로 알리지 않도록 테두리를 두껍게 하고 오류 문구를 함께 보여준다.
+  &:has(.c-input.is-invalid) {
+    border-color: $red-600;
+    box-shadow: inset 0 0 0 1px $red-600; // 2px처럼 보이되 레이아웃은 그대로
+  }
 }
 
 .c-input {
@@ -155,6 +161,14 @@
 }
 
 // ------------------------------------------
+// 오류 문구 (#bmi-error, hidden 속성으로 표시를 제어하므로 display는 지정하지 않는다)
+// ------------------------------------------
+.c-alert--error {
+  @include font-style(0.875rem, 600, 1.5); // 14px
+  color: $red-600;
+}
+
+// ------------------------------------------
 // 결과 패널
 // ------------------------------------------
 .c-bmi-result {
@@ -203,4 +217,22 @@
 .c-title--result {
   @include heading(1rem, 1.5);
   color: $white;
+}
+
+// 입력 전(Welcome) 상태: 제목과 안내 문구를 세로로 쌓고 제목을 키운다.
+// 빈 <output>은 aria-live 영역이라 display: none 대신 간격만 없애 높이 0으로 둔다.
+.c-bmi-result.is-empty {
+  .l-stack--result {
+    --space: 1rem; // 16px
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .l-stack--title {
+    --space: 0;
+  }
+
+  .c-title--result {
+    @include heading(1.5rem, 1.2); // 24px
+  }
 }

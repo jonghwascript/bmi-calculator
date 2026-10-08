@@ -45,6 +45,11 @@ const HEALTHY_BMI = { min: 18.5, max: 24.9 };
 const LBS_PER_STONE = 14;
 const INCHES_PER_FOOT = 12;
 const UPDATE_DELAY = 500; // ms, 마지막 입력 후 결과를 갱신하기까지 기다리는 시간
+// 단위 체계별 키·몸무게 입력 칸 name
+const FIELDS = {
+  metric: { height: ['height-cm'], weight: ['weight-kg'] },
+  imperial: { height: ['height-ft', 'height-in'], weight: ['weight-st', 'weight-lb'] },
+};
 
 function initBmiCalculator() {
   const form = document.getElementById('bmi-form');
@@ -122,6 +127,38 @@ function initBmiCalculator() {
     error.hidden = !message;
   };
 
+  // 잘못된 칸에 aria-invalid와 오류 문구 연결(aria-describedby)을 붙이고, 나머지 칸은 되돌린다.
+  // 단위 표시처럼 기존에 연결된 설명은 그대로 둔다.
+  const markInvalid = (names) => {
+    form.querySelectorAll('.c-input').forEach((input) => {
+      const isInvalid = names.includes(input.name);
+      const describedBy = (input.getAttribute('aria-describedby') ?? '')
+        .split(' ')
+        .filter((id) => id && id !== error?.id);
+      if (isInvalid && error) describedBy.push(error.id);
+
+      input.classList.toggle('is-invalid', isInvalid);
+      if (isInvalid) input.setAttribute('aria-invalid', 'true');
+      else input.removeAttribute('aria-invalid');
+      input.setAttribute('aria-describedby', describedBy.join(' '));
+    });
+  };
+
+  // 음수 등 읽을 수 없는 칸, 그리고 합계가 0 이하인 키·몸무게 칸을 찾는다.
+  const findInvalidFields = (unit, measurements) => {
+    const fields = FIELDS[unit];
+    const isFilled = (name) => read(name) !== null;
+    const invalid = [...fields.height, ...fields.weight].filter(
+      (name) => isFilled(name) && !Number.isFinite(read(name)),
+    );
+
+    if (measurements && invalid.length === 0) {
+      if (!(measurements.height > 0)) invalid.push(...fields.height.filter(isFilled));
+      if (!(measurements.weight > 0)) invalid.push(...fields.weight.filter(isFilled));
+    }
+    return invalid;
+  };
+
   const renderEmpty = () => {
     panel.classList.add('is-empty');
     title.textContent = 'Welcome!';
@@ -149,25 +186,24 @@ function initBmiCalculator() {
     const selected = form.querySelector('input[name="unit-system"]:checked');
     const unit = selected ? selected.value : 'metric';
     const measurements = getMeasurements(unit);
+    const invalid = findInvalidFields(unit, measurements);
 
-    if (!measurements) {
-      showError('');
-      renderEmpty();
-      return;
-    }
+    markInvalid(invalid);
 
-    const { height, weight } = measurements;
-    const isValid =
-      Number.isFinite(height) && Number.isFinite(weight) && height > 0 && weight > 0;
-
-    if (!isValid) {
+    // 음수는 다른 칸이 비어 있어도 바로 알린다.
+    if (invalid.length > 0) {
       showError('Please enter a height and weight greater than 0.');
       renderEmpty();
       return;
     }
 
     showError('');
-    renderResult(unit, calculateBmi(unit, measurements), height);
+    if (!measurements) {
+      renderEmpty();
+      return;
+    }
+
+    renderResult(unit, calculateBmi(unit, measurements), measurements.height);
   };
 
   // 결과 값이 aria-live 영역이므로, 타이핑 중에는 갱신을 미뤄
