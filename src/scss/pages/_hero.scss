@@ -20,7 +20,7 @@
 }
 
 .c-title--hero {
-  @include heading(48px, 1.1);
+  @include heading(3rem, 1.1);  //48px
   color: $blue-900;
   text-align: center;
 }

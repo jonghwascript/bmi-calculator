@@ -2,15 +2,15 @@
 
 // "Healthy habits" 섹션
 .c-tips {
-  margin-block-start: 62px;
-  padding-block: 56px;
+  margin-block-start: 3.875rem; //62px
+  padding-block: 3.5rem;  //56px
   background-image: $gradient-sky;
 }
 
 .l-grid--tips {
   @include mq('tablet') {
     grid-template-columns: 1fr;
-    row-gap: 40px;
+    row-gap: 2.5rem; //40px
   }
 }
 
@@ -19,16 +19,16 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
-  gap: 32px;
+  gap: 2rem;  //32px
 
   @include mq('tablet') {
     flex-wrap: nowrap;
-    gap: 40px;
+    gap: 2.5rem;  //40px
   }
 
   &__icon {
     flex-shrink: 0;
-    width: 64px;
+    width: 4rem;  //64px
     height: auto;
     aspect-ratio: 1;
   }
@@ -38,7 +38,7 @@
   }
 
   .c-title--card {
-    @include heading(24px, 1.2);
+    @include heading(1.5rem, 1.2); //24px
     color: $blue-900;
   }
 }

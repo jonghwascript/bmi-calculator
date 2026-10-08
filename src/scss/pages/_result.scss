@@ -2,21 +2,21 @@
 
 // "What your BMI result means" 섹션
 .c-result {
-  margin-block-start: 64px;
+  margin-block-start: 4rem; //64px
 
   .l-stack--intro {
-    --space: 32px;
+    --space: 2rem;  //32px
   }
 }
 
 .l-grid--result {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  row-gap: 48px;
+  row-gap: 3rem; //48px
 
   @include mq('tablet') {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    column-gap: 72px;
+    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr)); //300px
+    column-gap: 4.5rem; //72px
   }
 }
 

@@ -4,11 +4,11 @@
 // 섹션마다 다른 제목(hero, card 등)은 해당 섹션 파일에 둔다.
 
 .c-title--section {
-  @include heading(32px, 1.1);
+  @include heading(2rem, 1.1);  //32px
   color: $blue-900;
 }
 
 .c-paragraph {
-  @include font-style(16px, 400, 1.5);
+  @include font-style(1rem, 400, 1.5);  //16px
   color: $grey-500;
 }
