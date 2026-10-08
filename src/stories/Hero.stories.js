@@ -1,11 +1,11 @@
 import { renderTemplate, calculatorArgs, calculatorArgTypes } from './render.js';
 
 export default {
-  title: 'UI Components/Calculator',
+  title: 'UI Components/Hero',
   tags: ['autodocs'],
   args: calculatorArgs,
   argTypes: calculatorArgTypes,
-  render: (args) => renderTemplate('../pages/components/calculator.html', {}, args),
+  render: (args) => renderTemplate('../pages/components/hero.html', {"section":"c-hero","heading":"hero-title"}, args),
 };
 
 export const Default = {};

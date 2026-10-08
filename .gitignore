@@ -45,3 +45,6 @@ README-template.md
 style-guide.md
 design/*
 storybook-static
+# Playwright output
+/test-results
+/playwright-report

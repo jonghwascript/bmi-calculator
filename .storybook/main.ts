@@ -1,15 +1,9 @@
 import type { StorybookConfig } from '@storybook/html-vite';
 
 const config: StorybookConfig = {
-  stories: [
-      '../src/**/*.mdx',
-      '../src/**/*.stories.@(js|mjs|cjs)'
-    ],
+  stories: ['../src/stories/**/*.stories.js'],
   addons: ['@storybook/addon-docs'],
-  framework: {
-    name: '@storybook/html-vite',
-    options: {},
-  },
+  framework: { name: '@storybook/html-vite', options: {} },
   staticDirs: [
     { from: '../src/images', to: '/images' },
     { from: '../src/fonts', to: '/fonts' },

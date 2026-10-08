@@ -1,11 +1,11 @@
 import { renderTemplate, calculatorArgs, calculatorArgTypes } from './render.js';
 
 export default {
-  title: 'UI Components/Calculator',
+  title: 'Pages/BMI Calculator',
   tags: ['autodocs'],
   args: calculatorArgs,
   argTypes: calculatorArgTypes,
-  render: (args) => renderTemplate('../pages/components/calculator.html', {}, args),
+  render: (args) => renderTemplate('../pages/index.html', {}, args),
 };
 
 export const Default = {};
