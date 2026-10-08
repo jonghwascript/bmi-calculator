@@ -5,11 +5,20 @@
   margin-block-start: 3.875rem; //62px
   padding-block: 3.5rem;  //56px
   background-image: $gradient-sky;
+  @include mq('desktop'){
+    border-radius: 2.1875rem; //35px
+    border: 1px solid #D1DDF2;
+  }
 }
 
 .l-grid--tips {
   @include mq('tablet') {
     grid-template-columns: 1fr;
+    row-gap: 2.5rem; //40px
+  }
+
+  @include mq('desktop') {
+    grid-template-columns: 1fr 1fr 1fr;
     row-gap: 2.5rem; //40px
   }
 }
@@ -23,6 +32,11 @@
 
   @include mq('tablet') {
     flex-wrap: nowrap;
+    gap: 2.5rem;  //40px
+  }
+
+  @include mq('desktop') {
+    flex-wrap: wrap;
     gap: 2.5rem;  //40px
   }
 

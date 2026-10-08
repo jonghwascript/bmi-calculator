@@ -6,6 +6,10 @@
 .c-title--section {
   @include heading(2rem, 1.1);  //32px
   color: $blue-900;
+
+  @include mq('desktop'){
+    @include heading(2.75rem, 1.1);  //44px
+  }
 }
 
 .c-paragraph {

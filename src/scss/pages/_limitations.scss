@@ -7,18 +7,72 @@
 
 .l-grid--limitations {
   @include mq('tablet') {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto 3.5rem auto 1.5rem auto 1.5rem;
     grid-template-areas:
-      'title title'
-      '. .'
-      'gender age'
-      '. .'
-      'muscle pregnancy'
-      '. .'
-      'race race';
+      'title     title     title     title'
+      '.         .         .         .'
+      'gender    gender    age       age'
+      '.         .         .         .'
+      'muscle    muscle    pregnancy pregnancy'
+      '.         .         .         .'
+      '.         race      race      .';
     align-items: stretch;
     row-gap: 0;
+  }
+
+  @include mq('desktop') {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas: none;
+    column-gap: 2rem;
+    row-gap: 2rem;
+
+    &::before {
+      content: '';
+      grid-column: 2 / span 1;
+      grid-row: 1 / span 3;
+
+      width: 94px;
+      height: 122px;
+      justify-self: end; /* 셀 내 가로 위치: start, center, end */
+      align-self: center; /* 셀 내 세로 위치: start, center, end */
+
+      background: url('../images/pattern-curved-line-right.svg') no-repeat
+        center / contain;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .l-limitations__title {
+      grid-column: 1 / span 6;
+      grid-row: 1 / 2;
+    }
+
+    .l-limitations__gender {
+      grid-column: span 4 / 12;
+      grid-row: 1 / 2;
+    }
+
+    .l-limitations__muscle {
+      grid-column: span 4 / -1;
+      grid-row: 2 / 3;
+    }
+
+    .l-limitations__age {
+      grid-column: 5 / 9;
+      grid-row: 2 / 3;
+    }
+
+    .l-limitations__pregnancy {
+      grid-column: 3 / span 4;
+      grid-row: 3 / 4;
+    }
+
+    .l-limitations__race {
+      grid-column: 7 / span 4;
+      grid-row: 3 / 4;
+    }
   }
 }
 
@@ -31,22 +85,21 @@
   }
 }
 
-.l-limitations__race {
-  @include mq('tablet') {
-    justify-self: center;
-    width: 22.8125rem; //365px
-  }
-}
-
 .l-limitations__title {
   .c-title--section {
     @include mq('tablet') {
       text-align: center;
     }
+    @include mq('desktop') {
+      text-align: start;
+    }
   }
 
   .c-paragraph {
     text-align: center;
+    @include mq('desktop') {
+      text-align: start;
+    }
   }
 }
 
@@ -58,13 +111,13 @@
 
   .c-title--card {
     align-items: center;
-    @include heading(20px, 1.2);
+    @include heading(1.25rem, 1.2);
     color: $blue-900;
   }
 
   .icon {
     --space: 1rem;
-    width: 2rem;  //32px
+    width: 2rem; //32px
     height: 2rem; //32px
   }
 }

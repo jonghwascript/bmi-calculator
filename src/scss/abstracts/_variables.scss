@@ -31,7 +31,10 @@ $white: #fff;
 $black: #000;
 
 // 히어로 배경과 tips 섹션 배경이 같은 그라디언트를 공유한다.
-$gradient-sky: linear-gradient(135deg, #ffffff 0%, #d6e6fe 100%, #253347 100%);
+// $gradient-sky: linear-gradient(135deg, #ffffff 0%, #d6e6fe 100%, #253347 100%);
+
+$gradient-sky: linear-gradient(90deg, #D6E6FE 0%, #EBF3FF 40%, #FFFFFF 100%);
+
 
 // ------------------------------------------
 // Layout

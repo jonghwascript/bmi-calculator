@@ -16,13 +16,20 @@
 
 .l-grid--hero {
   grid-template-columns: 1fr;
-  row-gap: 32px;
+  row-gap: 2rem; //32px
+
+  @include mq('desktop') {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .c-title--hero {
-  @include heading(3rem, 1.1);  //48px
+  @include heading(3rem, 1.1); //48px
   color: $blue-900;
   text-align: center;
+  @include mq('desktop') {
+    text-align: start;
+  }
 }
 
 // 태블릿 이상에서만 제목을 두 줄로 나눈다.
@@ -36,4 +43,8 @@
 
 .c-hero .c-paragraph {
   text-align: center;
+
+  @include mq('desktop') {
+    text-align: start;
+  }
 }
