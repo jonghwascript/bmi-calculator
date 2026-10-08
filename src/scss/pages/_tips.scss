@@ -55,4 +55,8 @@
     @include heading(1.5rem, 1.2); //24px
     color: $blue-900;
   }
+
+  .c-paragraph {
+    color: $grey-600; // 그라디언트 배경 위 대비 확보
+  }
 }

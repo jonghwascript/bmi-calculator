@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 @use 'sass:map';
+@use 'sass:math';
 
 @use 'variables' as v;
 
@@ -30,7 +31,9 @@
   // 맵에 해당 기기 이름이 있는지 확인
   @if map.has-key(v.$breakpoints, $device) {
     // 🌟 min-width 기준으로 미디어 쿼리 자동 생성
-    @media (min-width: map.get(v.$breakpoints, $device)) {
+    // px 값을 em으로 바꿔, 사용자가 브라우저 글꼴 크기를 키우면 분기점도 함께 커지게 한다.
+    // (미디어 쿼리의 em은 브라우저 기본 글꼴 크기 16px 기준)
+    @media (min-width: math.div(map.get(v.$breakpoints, $device), 16px) * 1em) {
       @content;
       // 믹스인을 호출할 때 전달한 스타일이 여기에 쏙 들어갑니다
     }

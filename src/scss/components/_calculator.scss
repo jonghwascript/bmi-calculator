@@ -14,7 +14,7 @@
   margin: auto;
 
   @include mq('desktop') {
-    width: 35.25rem; // 564px
+    width: min(35.25rem, 100%); // 564px, 열보다 넓어지지 않게 제한
   }
 }
 
@@ -49,6 +49,13 @@
     background-color: $blue-500;
     vertical-align: middle;
     box-shadow: 0 0 0 8px $blue-100;
+  }
+
+  // 키보드 포커스: 실제 라디오는 u-sr-only로 숨겨져 있으므로 보이는 라벨에 표시한다.
+  &:has(.c-radio__input:focus-visible) {
+    outline: 2px solid $blue-500;
+    outline-offset: 4px;
+    border-radius: 0.5rem;
   }
 
   &__label {

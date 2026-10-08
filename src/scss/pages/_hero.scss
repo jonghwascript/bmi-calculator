@@ -27,6 +27,8 @@
   @include heading(3rem, 1.1); //48px
   color: $blue-900;
   text-align: center;
+  // 글꼴을 크게 키운 좁은 화면에서 긴 단어가 열을 밀어내지 않도록 필요할 때만 줄바꿈한다.
+  overflow-wrap: anywhere;
   @include mq('desktop') {
     text-align: start;
   }
@@ -42,6 +44,7 @@
 }
 
 .c-hero .c-paragraph {
+  color: $grey-600; // 그라디언트 배경 위 대비 확보
   text-align: center;
 
   @include mq('desktop') {
