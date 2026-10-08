@@ -29,7 +29,7 @@ Users should be able to:
 
 ### Calculator behavior
 
-The calculator starts with a welcome message. Complete, valid measurements produce a BMI result rounded to one decimal place. Negative inputs or completed measurements with a height or weight of zero display an error message. Switching units shows the corresponding fields and disables the inactive group.
+The source HTML starts with a welcome message, input guidance, and an empty BMI output, so no example BMI or weight classification is exposed before JavaScript initializes or when it fails to load. Complete, valid measurements produce a BMI result rounded to one decimal place. Negative inputs or completed measurements with a height or weight of zero display an error message. Switching units shows the corresponding fields and disables the inactive group.
 
 ### Screenshot
 
@@ -61,7 +61,9 @@ The page uses a `main` landmark and sections associated with their headings thro
 
 The inactive measurement group is both hidden and disabled. Hiding controls handles visibility, while disabling them excludes them from interaction and form validation. The script also updates inputs that have their own `disabled` attributes.
 
-The result uses an `output` element with `aria-live="polite"` and `aria-atomic="true"`. Invalid fields receive `aria-invalid` and a reference to the error message without losing their existing unit descriptions. The error message has `role="alert"`, so validation is communicated through text as well as styling.
+The entire result panel uses `aria-live="polite"` and `aria-atomic="true"`, grouping the BMI number, weight classification, and healthy weight range into one live region. The nested `output` uses `aria-live="off"` to avoid a separate numeric announcement. Actual announcement behavior still needs screen reader testing.
+
+The existing validation logic sets `aria-invalid="true"` on invalid fields and adds `bmi-error` to their `aria-describedby` values without losing the unit descriptions. When an error is resolved, both the invalid attribute and the error reference are removed. The error message has `role="alert"`, so validation is communicated through text as well as styling.
 
 #### CSS layout, responsive sizing, and selector behavior
 
@@ -99,6 +101,8 @@ Selector specificity matters when generic utility rules overlap with nested page
 
 The unit radios remain native controls, but their visual circles are drawn with pseudo-elements. Because the actual inputs are visually hidden, `:has(.c-radio__input:focus-visible)` draws a visible outline around the label.
 
+On devices matching `(hover: hover)`, unit radio labels and enabled input containers receive a pale blue hover background. Radio borders and valid input borders also turn blue; invalid inputs retain their red error borders. Disabled input containers do not receive this hover treatment.
+
 Hero and tips paragraphs use a darker gray on the gradient background than paragraphs on white. Long Hero headings use `overflow-wrap: anywhere` to reduce overflow when the available width is small or text is enlarged.
 
 #### JavaScript calculations, validation, and result updates
@@ -127,6 +131,13 @@ The parser distinguishes missing values from invalid values. A number input can 
 Numeric input is debounced for 500ms. This reduces repeated updates to the live result while the user is typing. Unit changes update immediately and cancel a pending numeric update.
 
 Radio buttons emit both `input` and `change` events. The numeric input handler excludes unit radios so a unit switch does not trigger a second delayed result update. The form also prevents submission from reloading the page when Enter is pressed.
+
+### Verification of the result and validation updates
+
+- Verified in Chrome at 1280 x 900 using the calculator HTML partial and shared JavaScript directly: empty output and guidance before initialization, partial inputs, valid BMI and range, classification changes, cleared inputs, invalid inputs, and unit switching.
+- Verified that a single atomic polite region contains the result number and explanation, and that invalid fields gain the error association, recover when corrected, preserve unit descriptions, and reset when switching units. The validation association was already implemented; no JavaScript change was needed for it.
+- `git diff --check` and `node --check src/js/bmi-calculator.mjs` passed for the preceding result changes. These checks do not establish full accessibility or visual correctness.
+- Screen reader announcements, Firefox behavior, and visual hover states were not verified in these focused checks. The checks used source components rather than a rebuilt full page.
 
 ### Continued development
 

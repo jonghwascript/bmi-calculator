@@ -210,21 +210,21 @@
       </div>
     </fieldset>
     <p class="c-alert c-alert--error" id="bmi-error" role="alert" hidden></p>
-    <div class="c-bmi-result l-box is-empty">
+    <!-- aria-live="polite" 웹 페이지의 특정 영역에 새로운 내용이 추가되거나 변경되었을 때, 스크린 리더는 현재 읽고 있던 내용을 중간에 끊지 않고 끝까지 읽은 후에 변경된 내용을 자연스럽게 이어서 읽어줍니 -->
+    <!-- aria-atomic="true"가 적용된 컨테이너)의 전체 내용을 처음부터 끝까지 다시 읽도록 만듭니다. -->
+    <div class="c-bmi-result l-box is-empty" aria-live="polite" aria-atomic="true">
       <div class="l-stack l-stack--result">
         <div class="l-stack l-stack--title">
-          <h3 class="c-title c-title--result">Your BMI</h3>
+          <h3 class="c-title c-title--result">Welcome!</h3>
           <output
             class="c-bmi-result__value"
             id="bmi-result"
             for="height-cm weight-kg height-ft height-in weight-st weight-lb"
-            aria-live="polite"
-            aria-atomic="true"
-            >22.0</output>
+            aria-live="off"
+            ></output>
         </div>
         <p class="c-bmi-result__text">
-          Your BMI suggests you’re a healthy weight. Your ideal weight is
-          between <span>9st 6lbs - 12st 10lbs.</span>
+          Enter your height and weight and you'll see your BMI result here
         </p>
       </div>
     </div>
