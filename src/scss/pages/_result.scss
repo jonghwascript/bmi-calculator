@@ -4,6 +4,15 @@
 .c-result {
   margin-block-start: 4rem; //64px
 
+  @include mq('desktop'){
+    margin-block-start: 5.5rem; //88px
+
+    .l-wrapper {
+      margin-block-start: 3.25rem; //52px
+    }
+  }
+
+
   .l-stack--intro {
     --space: 2rem;  //32px
     position: relative;
@@ -31,8 +40,9 @@
   }
 
   @include mq('desktop'){
-    // 최대 468px·465px, 공간이 부족하면 열과 간격이 함께 줄어 넘치지 않는다.
-    grid-template-columns: minmax(0, 29.25rem) minmax(0, 29.0625rem);
+    // 최대 564px·465px, 공간이 부족하면 열과 간격이 함께 줄어 넘치지 않는다.
+    // 최대값은 디자인 그대로, 공간이 부족하면 줄어든다.
+    grid-template-columns: minmax(0, 35.25rem) minmax(0, 29.0625rem);
     justify-content: center;
     column-gap: clamp(2rem, 8vw, 8.1875rem); // 최대 131px
   }

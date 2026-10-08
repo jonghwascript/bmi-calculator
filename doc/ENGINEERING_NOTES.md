@@ -243,6 +243,5 @@ Claude in Chrome 확장으로 연 탭이 백그라운드(`document.visibilitySta
 | --- | --- |
 | 텍스트 200% + 320px | 문서 너비 360px로 넘침(hero 영역). 320px 너비(WCAG 1.4.10 Reflow 기준, 기본 글꼴)와 375px 텍스트 200%는 통과. 원인 요소 미확인 |
 | Imperial 범위 표기 | 반올림 사용. 마크업 예시 문구(`9st 6lbs - 12st 10lbs`)와 1lb 차이. 디자인 시안(`preview.jpg`)과 대조 필요 |
-| 로고 링크 | 이름은 "home"인데 같은 페이지 h1로 이동 |
 | 스킵 링크 | `.c-skip-link` CSS만 있고 요소 없음 (한 페이지·반복 메뉴 없음이라 필수 아님) |
 | 미검증 | Firefox, 모바일 실기기, 스크린 리더, 고대비 모드 |
