@@ -9,6 +9,7 @@
   @include mq('tablet') {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto 3.5rem auto 1.5rem auto 1.5rem;
+    // Gap 마다 사이즈가 틀리다
     grid-template-areas:
       'title     title     title     title'
       '.         .         .         .'
@@ -24,10 +25,13 @@
   @include mq('desktop') {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(3, auto);
+    // 태블릿에 정의한 areas 무효화 
     grid-template-areas: none;
     column-gap: 2rem;
     row-gap: 2rem;
 
+    // before 도 grid 영역에 배치한다. 
+    //(grid-template-areas에 정의한 영역이 아니므로 grid-column, grid-row로 위치를 지정한다.
     &::before {
       content: '';
       grid-column: 2 / span 1;
@@ -106,6 +110,7 @@
 // 제한 사항 카드
 .c-card {
   @include mq('tablet') {
+    // grid 내에서 카드가 세로로 늘어나도록 높이를 100%로 한다.
     height: 100%;
   }
 
@@ -116,6 +121,7 @@
   }
 
   .icon {
+    // 아이콘과 텍스트 간격 
     --space: 1rem;
     width: 2rem; //32px
     height: 2rem; //32px

@@ -48,15 +48,7 @@
   }
 }
 
-// 데스크톱 전까지는 섹션 좌우 여백을 상쇄해 사진을 화면 가장자리까지 붙인다.
 .l-result__photo {
-  margin-inline: calc(-1 * var(--gutter-inline));
-
-  // 데스크톱은 페이지가 화면 전체 너비가 되는 구간(1024~1140px)이 있어 사진이 화면 끝에 붙으므로 해제한다.
-  @include mq('desktop') {
-    margin-inline: 0;
-  }
-
   img {
     width: 100%;
     height: 100%;

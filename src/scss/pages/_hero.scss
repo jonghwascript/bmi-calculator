@@ -1,6 +1,7 @@
 @use '../abstracts' as *;
 
 .c-hero__header {
+  //중앙 정렬 
   margin-inline: auto;
 
   @include mq('desktop') {

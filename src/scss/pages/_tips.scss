@@ -7,7 +7,7 @@
   background-image: $gradient-sky;
   @include mq('desktop'){
     border-radius: 2.1875rem; //35px
-    border: 1px solid #D1DDF2;
+    border: 1px solid $border-line;
   }
 }
 
@@ -36,6 +36,7 @@
   }
 
   @include mq('desktop') {
+    //아이콘 아래로 글이 줄바꿈
     flex-wrap: wrap;
     gap: 2.5rem;  //40px
   }
@@ -47,7 +48,7 @@
     aspect-ratio: 1;
   }
 
-  > .l-stack {
+  > .l-stack--card {
     flex-grow: 1;
   }
 
