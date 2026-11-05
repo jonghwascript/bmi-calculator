@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/main.js" type="module"></script>
+    <title>Frontend Mentor | Body Mass Index Calculator</title>
+  </head>
+  <body>
+    <main class="l-grid l-grid--page l-center">
+      <section class="c-hero" aria-labelledby="hero-title">
+        @@include('./components/hero.html')
+      </section>
+      <section class="c-result" aria-labelledby="result-title">
+        @@include('./components/result.html')
+      </section>
+      <section class="c-tips" aria-labelledby="tips-title">
+        @@include('./components/c-tips.html')
+      </section>
+      <section class="c-limitations" aria-labelledby="limitations-title">
+        @@include('./components/limitations.html')
+      </section>
+    </main>
+  </body>
+</html>

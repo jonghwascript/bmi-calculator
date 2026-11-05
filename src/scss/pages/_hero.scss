@@ -1,0 +1,54 @@
+@use '../abstracts' as *;
+
+.c-hero__header {
+  //중앙 정렬 
+  margin-inline: auto;
+
+  @include mq('desktop') {
+    margin-inline: 0;
+  }
+}
+
+.c-hero__logo {
+  width: clamp(2.25rem, calc(0.75rem + 3.125vw), 2.75rem);
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.l-grid--hero {
+  grid-template-columns: 1fr;
+  row-gap: 2rem; //32px
+
+  @include mq('desktop') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.c-title--hero {
+  @include heading(3rem, 1.1); //48px
+  color: $blue-900;
+  text-align: center;
+  // 글꼴을 크게 키운 좁은 화면에서 긴 단어가 열을 밀어내지 않도록 필요할 때만 줄바꿈한다.
+  overflow-wrap: anywhere;
+  @include mq('desktop') {
+    text-align: start;
+  }
+}
+
+// 태블릿 이상에서만 제목을 두 줄로 나눈다.
+.c-title__newline {
+  display: none;
+
+  @include mq('tablet') {
+    display: block;
+  }
+}
+
+.c-hero .c-paragraph {
+  color: $grey-600; // 그라디언트 배경 위 대비 확보
+  text-align: center;
+
+  @include mq('desktop') {
+    text-align: start;
+  }
+}

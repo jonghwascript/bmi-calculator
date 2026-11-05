@@ -1,0 +1,76 @@
+// Layout primitives from Every Layout by Heydon Pickering & Andy Bell
+// https://every-layout.dev/layouts — © Heydon Pickering & Andy Bell
+// Obtained via https://gist.github.com/Arkweid/18cc3e64c84e1292c2b3a5143bb02a2b
+// (no licence stated), then fixed and modified for this project.
+// Used under a purchased Every Layout licence held by the repository owner.
+// Not covered by this repository's license. Do not copy or redistribute.
+
+.l-stack {
+  --space: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--space, 1.5rem);
+}
+
+.l-stack > * {
+  margin-block: 0;
+}
+
+.l-box {
+  --padding: 1.5rem;
+  padding: var(--padding);
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  color: #1e293b;
+  border-radius: 0.5rem;
+  outline: 0.125rem solid transparent;
+  outline-offset: -0.125rem;
+}
+
+.l-center {
+  box-sizing: content-box;
+  max-inline-size: var(--measure, 60ch);
+  margin-inline: auto;
+  padding-inline-start: var(--gutter-inline, var(--s1, 1.5rem));
+  padding-inline-end: var(--gutter-inline, var(--s1, 1.5rem));
+}
+
+.l-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space, 1rem);
+  justify-content: center;
+  align-items: center;
+}
+
+.l-grid {
+  display: grid;
+  grid-gap: 1rem;
+  --minimum: 20ch;
+}
+
+@supports (width: min(var(--minimum), 100%)) {
+  .l-grid {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(var(--minimum), 100%), 1fr)
+    );
+  }
+}
+
+.l-icon {
+  height: 0.75em;
+  height: 1cap;
+  width: 0.75em;
+  width: 1cap;
+}
+
+.l-with-icon {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.l-with-icon .icon {
+  margin-inline-end: var(--space, 0.5em);
+}

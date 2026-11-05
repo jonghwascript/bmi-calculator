@@ -1,0 +1,35 @@
+.u-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.c-skip-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10000;
+    padding: 0.75rem 1rem;
+    background: #fff;
+    color: #000;
+    text-decoration: underline;
+    transform: translateY(calc(-100% - 2rem));
+
+    &:focus {
+        transform: translateY(0);
+    }
+}
+
+.u-hidden {
+    display: none !important;
+}
+
+.no-scroll {
+    overflow: hidden;
+}

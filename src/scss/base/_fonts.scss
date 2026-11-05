@@ -1,0 +1,12 @@
+// ==========================================
+// 폰트 기본 설정
+// ==========================================
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype');
+  font-weight: 100 900; 
+  font-style: normal;
+  font-display: swap;
+}

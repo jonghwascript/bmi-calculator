@@ -1,0 +1,24 @@
+// 진입점: 파셜을 불러오기만 한다. 출력 순서가 곧 캐스케이드 순서다.
+// abstracts(변수·믹스인)는 CSS를 출력하지 않으므로 각 파셜에서 직접 불러온다.
+
+// 1. Base: 폰트, 리셋, 전역 기본값
+@use 'base/fonts';
+@use 'base/reset';
+@use 'base/base';
+
+// 2. Layout: Every Layout 기본 요소, 페이지 그리드
+@use 'layout/every-layout';
+@use 'layout/page';
+
+// 3. Components: 여러 곳에서 쓰는 독립 컴포넌트
+@use 'components/typography';
+@use 'components/calculator';
+
+// 4. Pages: 이 페이지의 섹션별 스타일
+@use 'pages/hero';
+@use 'pages/result';
+@use 'pages/tips';
+@use 'pages/limitations';
+
+// 5. Utilities: 같은 명시도에서 다른 규칙을 이기도록 가장 마지막에 둔다.
+@use 'utilities/utilities';
